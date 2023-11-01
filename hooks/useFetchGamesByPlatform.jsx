@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react'
 
-const url = 'https://free-to-play-games-database.p.rapidapi.com/api/games'
 const options = {
   method: 'GET',
   headers: {
@@ -11,13 +10,13 @@ const options = {
   }
 }
 
-export function useFetchFreeGames () {
+export function useFetchGamesByPlatform (platform) {
   const [games, setGames] = useState([])
 
   useEffect(() => {
     const fetchFreeGames = async () => {
       try {
-        await fetch(url, options)
+        await fetch(`https://free-to-play-games-database.p.rapidapi.com/api/games?platform=${platform}`, options)
           .then(response => response.json())
           .then(data => setGames(data))
       } catch (error) {
@@ -26,7 +25,7 @@ export function useFetchFreeGames () {
     }
 
     fetchFreeGames()
-  }, [])
+  }, [platform])
 
   return { games }
 }

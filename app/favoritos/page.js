@@ -19,11 +19,11 @@ function ListOfFavGames () {
   const { favs } = useFav()
 
   return (
-    <>
-    {favs.lenght > 0
+    <ul className='grid grid-cols-3 gap-2 list-none'>
+    {favs.length > 0
       ? <GamesCard games={favs} />
       : <p>No tienes favoritos</p>
       }
-    </>
+    </ul>
   )
 }

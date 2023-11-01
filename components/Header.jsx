@@ -8,12 +8,11 @@ import { useContext, useState } from 'react'
 
 export default function Header () {
   const [categoryMenuOpen, setCategoryMenuOpen] = useState(false)
-  const [platformMenuOpen, setPlatformMenuOpen] = useState(false)
   const { loggedIn, handleLogout } = useContext(LoggedContext)
 
   return (
     <>
-    <nav className='flex items-center justify-between p-2 border-b border-gray-700 shadow-md shadow-gray-700'>
+    <nav className='flex items-center justify-between p-2 border-b border-gray-700 shadow-md bg-primary shadow-gray-700'>
       <Link href='/' className='text-2xl font-black tracking-wider'>Games Free</Link>
 
         <section className='flex items-center gap-4'>
@@ -22,21 +21,25 @@ export default function Header () {
             <button onClick={() => setCategoryMenuOpen(!categoryMenuOpen)}>
               Category
             </button>
+
           </div>
 
-          <button onClick={() => setPlatformMenuOpen(!platformMenuOpen)}>Platform</button>
+          <Link href='/pc-games'>PC</Link>
+
+          <Link href='/web-games'>Web Browser</Link>
 
         </section>
 
         <section className='flex items-center gap-4'>
         <Search />
+
         <Link href='/favoritos'>
           <FavoriteBorderOutlined />
         </Link>
 
         {loggedIn
           ? <>
-          <Link href='/perfil' className='p-2 text-gray-300 rounded-md hover:text-white'>Perfil</Link>
+          <Link href='/profile' className='p-2 text-gray-300 rounded-md hover:text-white'>Perfil</Link>
           <Button variant='contained' color='error' onClick={handleLogout}>Logout</Button>
           </>
 
@@ -52,11 +55,26 @@ export default function Header () {
 
         </section>
     </nav>
+    {categoryMenuOpen && <CategoryMenu />}
     </>
   )
 }
 
-/* const listOfCategoryFilter = [
+function CategoryMenu () {
+  return (
+    <div className='absolute flex justify-center w-full p-2 bg-secondary'>
+      <ul className='flex items-center justify-center max-w-xs gap-4 p-2 list-none'>
+        {listOfCategoryFilter.map(category => (
+          <li key={category.label}>
+            <Link href={category.href}>{category.label}</Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
+const listOfCategoryFilter = [
   {
     label: 'Shooter',
     href: '/games/shooter'
@@ -70,18 +88,3 @@ export default function Header () {
     href: '/games/battle_royale'
   }
 ]
-
-const listOfPlatformFilter = [
-  {
-    label: 'PC',
-    href: '/games/pc'
-  },
-  {
-    label: 'PS',
-    href: '/games/ps4'
-  },
-  {
-    label: 'Xbox',
-    href: '/games/xbox'
-  }
-] */
