@@ -48,7 +48,7 @@ export function ListOfAllGames () {
           </ul>
 
           <ul className='flex flex-col gap-4 list-none max-md:grid max-md:grid-cols-2'>
-          <h2 className='text-2xl font-bold'>Most Popular</h2>
+            <h2 className='text-2xl font-bold'>Most Popular</h2>
             {popularityGames.slice(0, 5).map((game) => (
               <GamesCard key={game.id} game={game} />
             ))}

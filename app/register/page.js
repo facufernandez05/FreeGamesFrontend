@@ -1,11 +1,13 @@
 'use client'
 
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { useState } from 'react'
 
 const url = 'http://localhost:1337/api/auth/local/register'
 
 export default function Register () {
+  const router = useRouter()
   const [userData, setUserData] = useState({
     username: '',
     email: '',
@@ -38,7 +40,7 @@ export default function Register () {
 
         if (response.ok) {
           console.log('Registro exitoso')
-          window.location.href = '/login'
+          router.push('/login')
         }
       } catch (error) {
         console.error('Error en la solicitud:', error)
@@ -50,27 +52,31 @@ export default function Register () {
 
   return (
     <main className='flex justify-center mt-4'>
-    <div className='flex flex-col gap-8'>
-      <h2>Create your account</h2>
-      {inputsRegister.map((input) => (
-        <input
-        className="p-2 bg-gray-700 rounded-md"
-        key={input.name}
-        placeholder={input.placeholder}
-        type={input.type}
-        value={userData[input.value]}
-        name={input.name}
-        onChange={handleChange} />
-      ))}
+      <div className='flex flex-col gap-8'>
+        <h2>Create your account</h2>
+        {inputsRegister.map((input) => (
+          <input
+            className='p-2 bg-gray-700 rounded-md'
+            key={input.name}
+            placeholder={input.placeholder}
+            type={input.type}
+            value={userData[input.value]}
+            name={input.name}
+            onChange={handleChange}
+          />
+        ))}
 
-      <button type='button' onClick={handleRegister}>Register</button>
+        <button type='button' onClick={handleRegister}>Register</button>
 
-      <p>
-        Already a member?
-        <Link className='ml-2 text-blue-500 hover:text-gray-200'
-        href='/login'>Log In</Link>
-      </p>
-    </div>
+        <p>
+          Already a member?
+          <Link
+            className='ml-2 text-blue-500 hover:text-gray-200'
+            href='/login'
+          >Log In
+          </Link>
+        </p>
+      </div>
     </main>
   )
 }

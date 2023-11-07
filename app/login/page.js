@@ -1,11 +1,13 @@
 'use client'
 
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { useState } from 'react'
 
 const url = 'http://localhost:1337/api/auth/local/'
 
 export default function Login () {
+  const router = useRouter()
   const [userData, setUserData] = useState()
   const [input, setInput] = useState({
     username: '',
@@ -36,7 +38,7 @@ export default function Login () {
         .then(data => setUserData(data))
       if (userData?.jwt) {
         window.localStorage.setItem('token', userData?.jwt)
-        window.location.href = '/'
+        router.push('/')
       }
     } catch (error) {
       console.error('Error en la solicitud:', error)
@@ -45,28 +47,35 @@ export default function Login () {
 
   return (
     <main className='flex justify-center mt-4'>
-    <div className='flex flex-col gap-8'>
-      <input className="p-2 bg-gray-700 rounded-md"
-        placeholder="Email or Username"
-        type="text"
-        value={input.username}
-        name='username'
-        onChange={handleChange} />
-      <input className="p-2 bg-gray-700 rounded-md"
-        placeholder="Password"
-        type="password"
-        value={input.password}
-        name='password'
-        onChange={handleChange}/>
+      <div className='flex flex-col gap-8'>
+        <input
+          className='p-2 bg-gray-700 rounded-md'
+          placeholder='Email or Username'
+          type='text'
+          value={input.username}
+          name='username'
+          onChange={handleChange}
+        />
+        <input
+          className='p-2 bg-gray-700 rounded-md'
+          placeholder='Password'
+          type='password'
+          value={input.password}
+          name='password'
+          onChange={handleChange}
+        />
 
-      <button type='button' onClick={handleLogin}>Log In</button>
+        <button type='button' onClick={handleLogin}>Log In</button>
 
-      <p>
-        Not a member yet?
-        <Link className='ml-2 text-blue-500 hover:text-gray-200'
-        href='/register'>Register</Link>
-      </p>
-    </div>
+        <p>
+          Not a member yet?
+          <Link
+            className='ml-2 text-blue-500 hover:text-gray-200'
+            href='/register'
+          >Register
+          </Link>
+        </p>
+      </div>
     </main>
   )
 }
