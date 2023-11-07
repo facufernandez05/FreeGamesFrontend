@@ -15,8 +15,13 @@ module.exports = {
       colors: {
         primary: '#272B30',
         secondary: '#3A3F44',
-        tertiary: '#00aaff',
+        tertiary: '#32383E',
         quaternary: '#00aaff'
+      },
+      screens: {
+        'max-sm': { max: '639' },
+        'max-md': { max: '767px' },
+        'max-lg': { max: '1023px' }
       }
     }
   },

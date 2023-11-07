@@ -1,26 +1,25 @@
 'use client'
 
+import { API_URL } from '@/services/api/API_URL'
 import { useEffect, useState } from 'react'
 
-const url = 'http://localhost:1337/api/auth/local/'
-
-const options = {
-  method: 'GET'
-}
+const url = `${API_URL}/api/users/me`
 
 export function useFetchProfileData () {
   const [userData, setUserData] = useState([])
 
   useEffect(() => {
-    const fetchProfileData = () => {
+    const fetchProfileData = async () => {
       try {
-        const response = fetch(url, options)
-        if (response.ok) {
-          const data = response.json()
-          setUserData(data)
-        } else {
-          console.error('Error en la respuesta de la API:', response.statusText)
-        }
+        const token = window.localStorage.getItem('token')
+        await fetch(url, {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
+          .then(response => response.json())
+          .then(data => setUserData(data))
       } catch (error) {
         console.error('Error en la solicitud:', error)
       }

@@ -32,7 +32,8 @@ export function FavProvider ({ children }) {
       addToFavs,
       removeFromFavs,
       clearFavs
-    }}>
+    }}
+    >
       {children}
     </FavContext.Provider>
   )

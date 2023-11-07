@@ -11,7 +11,8 @@ export function LoadingProvider ({ children }) {
     <LoadingContext.Provider value={{
       loading,
       setLoading
-    }}>
+    }}
+    >
       {children}
     </LoadingContext.Provider>
   )

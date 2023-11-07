@@ -6,10 +6,10 @@ import { FavProvider } from '@/context/fav'
 
 export default function RootLayout ({ children }) {
   return (
-    <html lang="en">
+    <html lang='en'>
       <head>
         <title>Free to play Games</title>
-        <meta charSet="UTF-8" />
+        <meta charSet='UTF-8' />
       </head>
       <body cz-shortcut-listen='false'>
         <LoadingProvider>

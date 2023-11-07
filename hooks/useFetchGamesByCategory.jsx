@@ -10,13 +10,13 @@ const options = {
   }
 }
 
-export function useFetchGamesByPlatform (platform) {
+export function useFetchGamesByCategory (category) {
   const [games, setGames] = useState([])
 
   useEffect(() => {
     const fetchFreeGames = async () => {
       try {
-        await fetch(`https://free-to-play-games-database.p.rapidapi.com/api/games?platform=${platform}`, options)
+        await fetch(`https://free-to-play-games-database.p.rapidapi.com/api/games?category=${category}`, options)
           .then(response => response.json())
           .then(data => setGames(data))
       } catch (error) {
@@ -25,7 +25,9 @@ export function useFetchGamesByPlatform (platform) {
     }
 
     fetchFreeGames()
-  }, [platform])
+  }, [category])
+
+  console.log(games)
 
   return { games }
 }

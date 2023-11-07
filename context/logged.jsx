@@ -8,7 +8,7 @@ export function LoggedProvider ({ children }) {
   const [loggedIn, setLoggedIn] = useState(false)
 
   useEffect(() => {
-    const jwtToken = localStorage.getItem('token')
+    const jwtToken = window.localStorage.getItem('token')
     if (jwtToken) {
       setLoggedIn(true)
     } else {
@@ -17,7 +17,8 @@ export function LoggedProvider ({ children }) {
   }, [setLoggedIn])
 
   const handleLogout = () => {
-    localStorage.removeItem('token')
+    window.localStorage.removeItem('token')
+    window.localStorage.removeItem('favs')
     setLoggedIn(false)
     window.location.reload()
   }
@@ -27,7 +28,8 @@ export function LoggedProvider ({ children }) {
       loggedIn,
       setLoggedIn,
       handleLogout
-    }}>
+    }}
+    >
       {children}
     </LoggedContext.Provider>
   )
