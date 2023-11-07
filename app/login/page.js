@@ -37,8 +37,10 @@ export default function Login () {
         .then(res => res.json())
         .then(data => setUserData(data))
       if (userData?.jwt) {
-        window.localStorage.setItem('token', userData?.jwt)
-        router.push('/')
+        if (typeof window !== 'undefined') {
+          window.localStorage.setItem('token', userData?.jwt)
+          router.push('/')
+        }
       }
     } catch (error) {
       console.error('Error en la solicitud:', error)

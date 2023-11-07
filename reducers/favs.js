@@ -8,7 +8,9 @@ export const FAVS_ACTION_TYPES = {
 
 // update localStorage with state for cart
 export const updateLocalStorage = state => {
-  window.localStorage.setItem('favs', JSON.stringify(state))
+  if (typeof window === 'undefined') {
+    window.localStorage.setItem('favs', JSON.stringify(state))
+  }
 }
 
 const UPDATE_STATE_BY_ACTION = {

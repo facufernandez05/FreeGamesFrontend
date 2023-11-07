@@ -11,15 +11,17 @@ export function useFetchProfileData () {
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
-        const token = window.localStorage.getItem('token')
-        await fetch(url, {
-          method: 'GET',
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        })
-          .then(response => response.json())
-          .then(data => setUserData(data))
+        if (typeof window !== 'undefined') {
+          const token = window.localStorage.getItem('token')
+          await fetch(url, {
+            method: 'GET',
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          })
+            .then(response => response.json())
+            .then(data => setUserData(data))
+        }
       } catch (error) {
         console.error('Error en la solicitud:', error)
       }
