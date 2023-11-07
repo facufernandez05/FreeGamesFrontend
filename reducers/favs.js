@@ -1,4 +1,7 @@
-export const favsInitialState = JSON.parse(window.localStorage.getItem('favs')) || []
+export let favsInitialState
+if (typeof window !== 'undefined') {
+  favsInitialState = window.localStorage.getItem('key')
+}
 
 export const FAVS_ACTION_TYPES = {
   ADD_TO_FAVS: 'ADD_TO_FAVS',

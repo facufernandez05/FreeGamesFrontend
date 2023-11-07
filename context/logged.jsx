@@ -1,6 +1,6 @@
 'use client'
 
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 import { createContext, useEffect, useState } from 'react'
 
 export const LoggedContext = createContext()
